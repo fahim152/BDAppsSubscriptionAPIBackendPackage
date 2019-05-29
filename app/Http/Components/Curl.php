@@ -28,7 +28,7 @@ class Curl {
         $err = curl_error($curl);
 
         curl_close($curl);
-
+dd($response);
         if ($err) {
             $data['error'] = "cURL Error #:" . $err;
         } else {

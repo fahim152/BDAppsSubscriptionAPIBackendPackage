@@ -20,7 +20,7 @@ class SMSController extends Controller
        // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
       
-        return response()->json($this->curlPOSTsms($message_json));
+        return $this->curlPOSTsms($message_json);
         
     }
     public function getSendMessageJson($app_id, $password, $message, $dest_addr ) {
