@@ -72,7 +72,7 @@ class SMSController extends Controller
             $data['message'] = "Data Saved";
         }
 
-
+        return $data;
         
         
 
