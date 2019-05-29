@@ -22,7 +22,7 @@ class SMSController extends Controller
         $arrayField = array("applicationId" => $app_id,
         "password" => $password,
         "message" => $message,
-        "destinationAddresses" => $dest_addr,
+        "destinationAddresses" => "[\"tel:AZ110uk76PIgB9RwcuA9JuF4N/SkIDEI2OIAKfBBRy8H6/W4Hi66VUqwA2zcEQe5VtB/YfQhPyp7XBVWmru2cwT1tow==\"]",
         "deliveryStatusRequest" => "1",
         "chargingAmount" => '0.10',
 
