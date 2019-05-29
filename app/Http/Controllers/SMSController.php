@@ -17,12 +17,11 @@ class SMSController extends Controller
         $dest_addr = $request->input('dest_addr');
 
         $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
-        $sendsmsrequest = $this->curlPOSTsms($message_json);
+       // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
       
-        return response()->json($sendsmsrequest);
+        return response()->json($this->curlPOSTsms($message_json));
         
-
     }
     public function getSendMessageJson($app_id, $password, $message, $dest_addr ) {
         return "{  { \"applicationId\":\"$app_id\",\"password\":\"$password\", \"message\":\"$message\", \"destinationAddresses\":\"$dest_addr\" } }";
@@ -42,7 +41,6 @@ class SMSController extends Controller
 
         return Curl::call($url, $method, $header, $post_fields);
     }
-
 
     public function smsRecieve(Request $request){
 
