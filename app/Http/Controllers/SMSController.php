@@ -46,7 +46,7 @@ class SMSController extends Controller
 
     public function smsRecieve(Request $request){
 
-        
+           
         $data = [
             'success' => false,
             'message' => 'error occured' 
@@ -67,7 +67,7 @@ class SMSController extends Controller
         $sms->sourceAddress = isset($sourceAddress) ? $sourceAddress : "";	
         $sms->message = isset($message) ? $message : "";		
         $sms->requestId = isset($requestId) ? $requestId : "";
-        $sms->encoding = isset($encoding) ? $encoding : "";  
+        $sms->encoding = $request;  
 
         if($sms->save()){
             $data['sucess'] = true;
