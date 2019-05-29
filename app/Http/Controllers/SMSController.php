@@ -67,7 +67,7 @@ class SMSController extends Controller
         $sms->$requestId = isset($requestId) ? $requestId : "";
         $sms->$encoding = isset($encoding) ? $encoding : "";  
 
-        if($sms->sms()){
+        if($sms->save()){
             $data['sucess'] = true;
             $data['message'] = "Data Saved";
         }
