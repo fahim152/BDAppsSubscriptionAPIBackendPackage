@@ -10,12 +10,13 @@ class SMSController extends Controller
 {
     
     public function smsSend(Request $request){
-     
+        
+
         $app_id = $request->input('app_id');
         $password = $request->input('password');
         $message = $request->input('message');
         $dest_addr = $request->input('dest_addr');
-
+       
 //        $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
       
         $arrayField = array("applicationId" => $app_id,
@@ -27,6 +28,8 @@ class SMSController extends Controller
 
      
         );
+        print_r($arrayField);
+        die();
 
        $jsonObjectFields = json_encode($arrayField);
       

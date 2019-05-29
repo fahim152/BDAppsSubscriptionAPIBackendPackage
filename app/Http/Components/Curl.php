@@ -33,7 +33,7 @@ class Curl {
             $data['error'] = "cURL Error #:" . $err;
         } else {
             $data = json_decode($response, true);
-            $data['success'] = true;
+           
         }
         return $data;
     }
