@@ -17,10 +17,10 @@ class CreateSmsTable extends Migration
             $table->bigIncrements('id');
             $table->string('version')->nullable();
             $table->string('applicationId')->nullable();
-            $table->string('sourceAddress')->nullable();
-            $table->string('message')->nullable();
-            $table->string('requestId')->nullable();
-            $table->string('encoding')->nullable();
+            $table->string('subscriberId')->nullable();
+            $table->string('status')->nullable();
+            $table->string('frequency')->nullable();
+            $table->string('timeStamp')->nullable();
       
             
             $table->timestamps();

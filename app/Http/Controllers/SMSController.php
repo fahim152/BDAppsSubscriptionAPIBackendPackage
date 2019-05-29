@@ -53,19 +53,19 @@ class SMSController extends Controller
         
         $version =  $request->input('version');	
         $applicationId =  $request->input('applicationId');		
-        $sourceAddress =  $request->input('sourceAddress');	
-        $message =  $request->input('message');		
-        $requestId =  $request->input('requestId');	
-        $encoding =  $request->input('encoding');			
+        $subscriberId =  $request->input('subscriberId');	
+        $status =  $request->input('status');		
+        $frequency =  $request->input('frequency');	
+        $timeStamp =  $request->input('timeStamp');			
 
         $sms = new SmsSaved();
 
         $sms->version = isset($version) ? $version : "";
         $sms->applicationId = isset($applicationId) ? $applicationId : "";		
-        $sms->sourceAddress = isset($sourceAddress) ? $sourceAddress : "";	
-        $sms->message = isset($message) ? $message : "";		
-        $sms->requestId = isset($requestId) ? $requestId : "";
-        $sms->encoding = $request;  
+        $sms->subscriberId = isset($subscriberId) ? $subscriberId : "";	
+        $sms->status = isset($status) ? $status : "";		
+        $sms->frequency = isset($frequency) ? $frequency : "";
+        $sms->timeStamp = isset($timeStamp) ? $timeStamp : "";  
 
         if($sms->save()){
             $data['sucess'] = true;
