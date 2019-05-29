@@ -10,8 +10,7 @@ class SMSController extends Controller
 {
     
     public function smsSend(Request $request){
-        
-
+    
         $app_id = $request->input('app_id');
         $password = $request->input('password');
         $message = $request->input('message');
@@ -25,21 +24,14 @@ class SMSController extends Controller
         "message" => "hello there",
         "destinationAddresses" => "[\"tel:AZ110uk76PIgB9RwcuA9JuF4N/SkIDEI2OIAKfBBRy8H6/W4Hi66VUqwA2zcEQe5VtB/YfQhPyp7XBVWmru2cwT1tow==\"]",
         
-     
         );
         
-
-       $jsonObjectFields = json_encode($arrayField);
-        
-      
+       $jsonObjectFields = json_encode($arrayField); 
         // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
       
         return $this->curlPOSTsms($jsonObjectFields);
         
-    }
-    public function getSendMessageJson($app_id, $password, $message, $dest_addr ) {
-        return "{  { \"applicationId\":\"$app_id\",\"password\":\"$password\", \"message\":\"$message\", \"destinationAddresses\":\"$dest_addr\" } }";
     }
 
     public function curlPOSTsms($jsonObjectFields){
@@ -49,8 +41,8 @@ class SMSController extends Controller
        
         $method = "POST";
         $header = [
-            "content-type: application/json",
-            "accept: application/json",
+            "Content-type: application/json",
+            
         ];
         $post_fields = $jsonObjectFields ;
 
