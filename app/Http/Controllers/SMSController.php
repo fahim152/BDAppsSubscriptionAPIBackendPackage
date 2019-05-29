@@ -16,18 +16,34 @@ class SMSController extends Controller
         $message = $request->input('message');
         $dest_addr = $request->input('dest_addr');
 
-        $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
-       // $sendsmsrequest = $this->curlPOSTsms($message_json);
+//        $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
+      
+        $arrayField = array("applicationId" => $app_id,
+        "password" => $password,
+        "message" => $message,
+       // "deliveryStatusRequest" => $deliveryStatusRequest,
+        "destinationAddresses" => $dest_addr,
+       // "sourceAddress" => $sourceAddress,
+       // "chargingAmount" => $charging_amount,
+        // "encoding" => $encoding,
+        // "version" => $version,
+        //"binaryHeader" => $binary_header
+        );
+
+      $jsonObjectFields = json_encode($arrayField);
+      
+      
+        // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
       
-        return $this->curlPOSTsms($message_json);
+        return $this->curlPOSTsms($jsonObjectFields);
         
     }
     public function getSendMessageJson($app_id, $password, $message, $dest_addr ) {
         return "{  { \"applicationId\":\"$app_id\",\"password\":\"$password\", \"message\":\"$message\", \"destinationAddresses\":\"$dest_addr\" } }";
     }
 
-    public function curlPOSTsms($message_json){
+    public function curlPOSTsms($jsonObjectFields){
         $url = "";
 
         $url = "https://developer.bdapps.com/sms/send";
@@ -37,7 +53,7 @@ class SMSController extends Controller
             "content-type: application/json",
             "accept: application/json",
         ];
-        $post_fields = $message_json ;
+        $post_fields = $jsonObjectFields ;
 
         return Curl::call($url, $method, $header, $post_fields);
     }
