@@ -19,13 +19,12 @@ class SMSController extends Controller
        
 //        $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
       
-        $arrayField = array("applicationId" => $app_id,
-        "password" => $password,
-        "message" => $message,
+        $arrayField = array(
+        "applicationId" => "APP_014086",
+        "password" => "34a957801d34126bb54c592bab1a9dcf",
+        "message" => "hello there",
         "destinationAddresses" => "[\"tel:AZ110uk76PIgB9RwcuA9JuF4N/SkIDEI2OIAKfBBRy8H6/W4Hi66VUqwA2zcEQe5VtB/YfQhPyp7XBVWmru2cwT1tow==\"]",
         "deliveryStatusRequest" => "1",
-        "chargingAmount" => '0.10',
-
      
         );
         
