@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Components\Curl;
+use App\SmsSaved;
 
 class SMSController extends Controller
 {
@@ -41,6 +42,46 @@ class SMSController extends Controller
 
         return Curl::call($url, $method, $header, $post_fields);
     }
+
+
+    public function smsRecieve(Request $request){
+        $data = [
+            'success' => false,
+            'message' => 'error occured' 
+  
+        ];
+        
+        $version =  $request->input('version');
+        $applicationId =  $request->input('applicationId');		
+        $sourceAddress =  $request->input('sourceAddress');	
+        $message =  $request->input('message');		
+        $requestId =  $request->input('requestId');	
+        $encoding =  $request->input('encoding');			
+
+        $sms = new SmsSaved();
+
+        $sms->$version = isset($version) ? $version : "";
+        $sms->$applicationId = isset($applicationId) ? $applicationId : "";		
+        $sms->$sourceAddress = isset($sourceAddress) ? $sourceAddress : "";	
+        $sms->$message = isset($message) ? $message : "";		
+        $sms->$requestId = isset($requestId) ? $requestId : "";
+        $sms->$encoding = isset($encoding) ? $encoding : "";  
+
+        if($sms->sms()){
+            $data['sucess'] = true;
+            $data['message'] = "Data Saved";
+        }
+
+
+        
+        
+
+    }
+     
+
+
+
+    
 
 
 }

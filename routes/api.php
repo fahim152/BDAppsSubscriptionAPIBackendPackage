@@ -19,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::post('send', 'SMSController@smsSend');
+Route::post('send', 'SMSController@smsRecieve');
+Route::post('send_sms', 'SMSController@smsSend');
+
+Route::post('recieve', 'SMSController@smsRecieve');
