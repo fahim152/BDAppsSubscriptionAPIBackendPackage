@@ -45,13 +45,15 @@ class SMSController extends Controller
 
 
     public function smsRecieve(Request $request){
+
+        
         $data = [
             'success' => false,
             'message' => 'error occured' 
   
         ];
         
-        $version = 
+        $version =  $request->input('version');	
         $applicationId =  $request->input('applicationId');		
         $sourceAddress =  $request->input('sourceAddress');	
         $message =  $request->input('message');		
