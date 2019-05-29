@@ -21,16 +21,14 @@ class SMSController extends Controller
         $arrayField = array("applicationId" => $app_id,
         "password" => $password,
         "message" => $message,
-       // "deliveryStatusRequest" => $deliveryStatusRequest,
         "destinationAddresses" => $dest_addr,
-       // "sourceAddress" => $sourceAddress,
-       // "chargingAmount" => $charging_amount,
-        // "encoding" => $encoding,
-        // "version" => $version,
-        //"binaryHeader" => $binary_header
+        "deliveryStatusRequest" => "1",
+        "chargingAmount" => '0.10',
+
+     
         );
 
-      $jsonObjectFields = json_encode($arrayField);
+       $jsonObjectFields = json_encode($arrayField);
       
       
         // $sendsmsrequest = $this->curlPOSTsms($message_json);
