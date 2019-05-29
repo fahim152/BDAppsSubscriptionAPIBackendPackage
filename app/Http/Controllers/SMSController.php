@@ -28,8 +28,7 @@ class SMSController extends Controller
 
      
         );
-        print_r($arrayField);
-        die();
+        
 
        $jsonObjectFields = json_encode($arrayField);
       
