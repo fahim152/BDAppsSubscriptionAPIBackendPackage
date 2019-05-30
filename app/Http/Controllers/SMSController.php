@@ -29,17 +29,18 @@ class SMSController extends Controller
         );
         
 
-       $jsonObjectFields = json_encode($arrayField);
-        
-      
+       //$jsonObjectFields = json_encode($arrayField);
+       $jsonObjectFields = $this->getSendMessageJson();
         // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
       
         return $this->curlPOSTsms($jsonObjectFields);
         
     }
-    public function getSendMessageJson($app_id, $password, $message, $dest_addr ) {
-        return "{  { \"applicationId\":\"$app_id\",\"password\":\"$password\", \"message\":\"$message\", \"destinationAddresses\":\"$dest_addr\" } }";
+    //$app_id, $password, $message, $dest_addr
+    public function getSendMessageJson( ) {
+        return "{\n\t\"applicationId\": \"APP_014086\",\n\t\"password\": \"34a957801d34126bb54c592bab1a9dcf\",\n\t\"message\": \"hello there\",\n\t\"destinationAddresses\": [\"tel:AZ110uk76PIgB9RwcuA9JuF4N\\/SkIDEI2OIAKfBBRy8H6\\/W4Hi66VUqwA2zcEQe5VtB\\/YfQhPyp7XBVWmru2cwT1tow==\"]\n\t}";
+    
     }
 
     public function curlPOSTsms($jsonObjectFields){
@@ -49,13 +50,14 @@ class SMSController extends Controller
        
         $method = "POST";
         $header = [
-            "content-type: application/json",
-            "accept: application/json",
+            "Content-type: application/json",
+            "Accept : application/json"
         ];
         $post_fields = $jsonObjectFields ;
 
         return Curl::call($url, $method, $header, $post_fields);
     }
+
 
     public function smsRecieve(Request $request){
 
@@ -95,7 +97,7 @@ class SMSController extends Controller
      
 
 
-
+    {
     
 
 
