@@ -22,7 +22,8 @@ class Curl {
             $data[CURLOPT_POSTFIELDS] = $post_fields;
         }
 
-        dd($data[CURLOPT_POSTFIELDS]);
+        print_r($data[CURLOPT_POSTFIELDS]);
+        die();
         curl_setopt_array($curl, $data);
 
         $response = curl_exec($curl);
