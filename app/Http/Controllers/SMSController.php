@@ -27,11 +27,13 @@ class SMSController extends Controller
         );
         
 
+
        $jsonObjectFields = json_encode($arrayField);
        //$jsonObjectFields = $this->getSendMessageJson();
         // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
-     
+        print_r($jsonObjectFields);
+        die();
         return $this->curlPOSTsms($jsonObjectFields);
         
     }
