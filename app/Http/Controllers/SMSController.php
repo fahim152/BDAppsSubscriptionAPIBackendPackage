@@ -10,8 +10,7 @@ class SMSController extends Controller
 {
     
     public function smsSend(Request $request){
-        
-
+    
         $app_id = $request->input('app_id');
         $password = $request->input('password');
         $message = $request->input('message');
@@ -23,9 +22,8 @@ class SMSController extends Controller
         "applicationId" => "APP_014086",
         "password" => "34a957801d34126bb54c592bab1a9dcf",
         "message" => "hello there",
-        "destinationAddresses" => "[\"tel:AZ110uk76PIgB9RwcuA9JuF4N/SkIDEI2OIAKfBBRy8H6/W4Hi66VUqwA2zcEQe5VtB/YfQhPyp7XBVWmru2cwT1tow==\"]",
-        "deliveryStatusRequest" => "1",
-     
+        //"destinationAddresses" => "[\"tel:AZ110uk76PIgB9RwcuA9JuF4N/SkIDEI2OIAKfBBRy8H6/W4Hi66VUqwA2zcEQe5VtB/YfQhPyp7XBVWmru2cwT1tow==\"]"
+        "destinationAddresses" => "[\"tel:all\"]"
         );
         
 
@@ -96,8 +94,6 @@ class SMSController extends Controller
     }
      
 
-
-    {
     
 
 
