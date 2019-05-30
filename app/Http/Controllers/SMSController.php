@@ -32,8 +32,7 @@ class SMSController extends Controller
        //$jsonObjectFields = $this->getSendMessageJson();
         // $sendsmsrequest = $this->curlPOSTsms($message_json);
 
-        print_r($jsonObjectFields);
-        die();
+    
         return $this->curlPOSTsms($jsonObjectFields);
         
     }
@@ -53,7 +52,7 @@ class SMSController extends Controller
             "Content-type: application/json",
             "Accept : application/json"
         ];
-        $post_fields = $jsonObjectFields ;
+        $post_fields = $jsonObjectFields;
 
         return Curl::call($url, $method, $header, $post_fields);
     }
