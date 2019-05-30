@@ -22,8 +22,7 @@ class Curl {
             $data[CURLOPT_POSTFIELDS] = $post_fields;
         }
 
-        print_r($data[CURLOPT_POSTFIELDS]);
-        die();
+        
         curl_setopt_array($curl, $data);
 
         $response = curl_exec($curl);
@@ -35,7 +34,7 @@ class Curl {
             $data['error'] = "cURL Error #:" . $err;
         } else {
             $data = json_decode($response, true);
-           
+            $data['message'] = "response";
         }
         return $data;
     }
