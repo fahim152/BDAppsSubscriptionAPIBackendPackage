@@ -134,7 +134,7 @@ class SmsSender{
 }
 
 
-class SMSServiceException extends Exception{
+class SMSServiceException{
 	private $statusCode,
 	$statusDetail;
 
