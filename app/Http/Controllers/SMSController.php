@@ -25,11 +25,14 @@ class SMSController extends Controller
         "destinationAddresses" => ["tel:B%3C4syfNGoCtonwa/ENJ961lg1cmq6pWz0m+5mBnTliLT3aiDqPYAc9dpKD+QLV6GRnnHSc35zTH6h36G2aED48O0w=="]
         
         );
-        
+ 
+
        $jsonObjectFields = json_encode($arrayField);
-  
+        
+       print_r($jsonObjectFields);
+       die();
     
-        return $this->curlPOSTsms($jsonObjectFields);
+        //return $this->curlPOSTsms($jsonObjectFields);
         
     }
     //$app_id, $password, $message, $dest_addr
