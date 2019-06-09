@@ -16,7 +16,7 @@ class SMSController extends Controller
         $app_id = "APP_014086";
         $password = "34a957801d34126bb54c592bab1a9dcf";
         $sms_ob = new SmsSender($url, $app_id, $password);
-        dd($sms_ob);
+       
         return $sms_ob->broadcast('hello how are you'); 
 
     }
