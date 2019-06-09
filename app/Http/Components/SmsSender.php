@@ -19,7 +19,7 @@ class Core
 
 	}
 }
-class SMSSender  extends Core{
+class SmsSender extends Core{
 	private $applicationId,
 			$password,
 			$charging_amount,
