@@ -19,10 +19,10 @@ class SMSController extends Controller
 //        $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
       
         $arrayField = array(
-        "applicationId" => "APP_014086",
-        "password" => "34a957801d34126bb54c592bab1a9dcf",
-        "message" => "Hello Friend",
-        "destinationAddresses" => ["tel:B%3C4syfNGoCtonwa/ENJ961lg1cmq6pWz0m+5mBnTliLT3aiDqPYAc9dpKD+QLV6GRnnHSc35zTH6h36G2aED48O0w=="]
+        "applicationId"=>"APP_014086",
+        "password"=>"34a957801d34126bb54c592bab1a9dcf",
+        "message"=>"Hello Friend",
+        "destinationAddresses"=>["tel:B%3C4syfNGoCtonwa/ENJ961lg1cmq6pWz0m+5mBnTliLT3aiDqPYAc9dpKD+QLV6GRnnHSc35zTH6h36G2aED48O0w=="]
         
         );
  
@@ -31,6 +31,7 @@ class SMSController extends Controller
         
        print_r($jsonObjectFields);
        die();
+
     
         //return $this->curlPOSTsms($jsonObjectFields);
         
