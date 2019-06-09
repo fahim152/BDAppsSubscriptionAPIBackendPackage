@@ -20,8 +20,7 @@ class SmsSender{
 	*/		
 	public function __construct($serverURL, $applicationId, $password)
 	{
-        echo "hello";
-    die();
+     
 		if(!(isset($serverURL, $applicationId, $password)))
 			throw new SMSServiceException('Request Invalid.', 'E1312');
 		else {
