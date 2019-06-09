@@ -11,6 +11,7 @@ class SMSController extends Controller
 {
 
     public function smsSend(){
+        dd("hello");
         $url = "https://developer.bdapps.com/sms/send";
         $app_id = "APP_014086";
         $password = "34a957801d34126bb54c592bab1a9dcf";
