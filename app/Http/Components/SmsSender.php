@@ -61,11 +61,12 @@ class SmsSender{
 	}
 	
 	private function handleResponse($jsonResponse){
-	
-		$statusCode = $jsonResponse->statusCode;
-		$statusDetail = $jsonResponse->statusDetail;
+        $jsonResponse2 = json_decode($jsonResponse);
+
+		$statusCode = $jsonResponse2->statusCode;
+		$statusDetail = $jsonResponse2->statusDetail;
 		
-		if(empty($jsonResponse))
+		if(empty($jsonResponse2))
 			throw new SMSServiceException('Invalid server URL', '500');
 		else if(strcmp($statusCode, 'S1000')==0)
 			return "true";
