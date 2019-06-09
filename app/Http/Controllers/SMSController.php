@@ -29,11 +29,8 @@ class SMSController extends Controller
 
        $jsonObjectFields = json_encode($arrayField);
         
-       print_r($jsonObjectFields);
-       die();
-
     
-        //return $this->curlPOSTsms($jsonObjectFields);
+        return $this->curlPOSTsms($jsonObjectFields);
         
     }
     //$app_id, $password, $message, $dest_addr
@@ -43,8 +40,7 @@ class SMSController extends Controller
     }
 
     public function curlPOSTsms($jsonObjectFields){
-        $url = "";
-
+        
         $url = "https://developer.bdapps.com/sms/send";
        
         $method = "POST";
