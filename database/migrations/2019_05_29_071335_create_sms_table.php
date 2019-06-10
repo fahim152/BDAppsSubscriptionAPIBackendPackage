@@ -22,7 +22,6 @@ class CreateSmsTable extends Migration
             $table->string('frequency')->nullable();
             $table->string('timeStamp')->nullable();
       
-            
             $table->timestamps();
         });
     }

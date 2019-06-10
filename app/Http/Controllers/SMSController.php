@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use App\Http\Components\Curl;
 use App\Http\Components\SmsSender;
 use App\SmsSaved;
+use App\SubscriptionData;
 
 class SMSController extends Controller
 {
 
     public function smsSend(Request $request){
-        
         $url = "https://developer.bdapps.com/sms/send";
-        $app_id = "APP_014086";
+       $app_id = "APP_014086";
+        //$app_id = $request->input('app_id');
         $message = $request->input('message');
         $password = "34a957801d34126bb54c592bab1a9dcf";
+       // $password = $request->input('password');
+
         
         $sms_ob = new SmsSender($url, $app_id, $password);
         
@@ -67,24 +70,80 @@ class SMSController extends Controller
 
         return Curl::call($url, $method, $header, $post_fields);
     }
+       /** This is for generating random 6 digit string for doctor's referral. 
+     * 
+     */
+    public function generateRandomString($length, $keyspace = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') {
+        $str = '';
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $str .= $keyspace[rand(0, $max)];
+        }
+        return strtoupper($str);
+    }
 
+    public function sendSubsriptionSmsToSubscriber($app_id, $message, $subscriberId){
+        $url = "https://developer.bdapps.com/sms/send";
+
+        $password = "34a957801d34126bb54c592bab1a9dcf";
+        $sms_ob = new SmsSender($url, $app_id, $password);
+        $res =   $sms_ob->sms($message, $subscriberId);
+
+    }
 
     public function smsRecieve(Request $request){
-
-           
         $data = [
             'success' => false,
             'message' => 'error occured' 
   
         ];
+
+        // if(!empty($inspect)){
+        //     $arr1 = explode(' ',trim($inspect));
+        //     $str = $arr1[1];
+
+        //     $message =  $request->input('message');	
+        //     $phone =  $request->input('phone');	
+        //     $requestId =  $request->input('requestId');		
+        //     $encoding =  $request->input('encoding');	
+        //     $applicationId =  $request->input('applicationId');		
+        //     $sourceAddress =  $request->input('sourceAddress');	
+        //     $version =  $request->input('version');		
+
+        //     $sms_req = new Sms();
+        //     $sms_req->message = isset($message) ?  $message : "";
+        //     $sms_req->requestId = isset($requestId) ?  $requestId : "";
+        //     $sms_req->encoding = isset($encoding) ?  $encoding : "";
+        //     $sms_req->applicationId = isset($applicationId) ?  $applicationId : "";
+        //     $sms_req->sourceAddress = isset($sourceAddress) ?  $sourceAddress : "";
+        //     $sms_req->version = isset($version) ?  $version : "";
         
+        // }else{
+            
+
+        // }
+
         $version =  $request->input('version');	
         $applicationId =  $request->input('applicationId');		
         $subscriberId =  $request->input('subscriberId');	
         $status =  $request->input('status');		
         $frequency =  $request->input('frequency');	
         $timeStamp =  $request->input('timeStamp');			
-        $inspect =  $request['message'];			
+      
+        if($status == "REGISTERED"){
+            $subData = new SubscriptionData();
+            $subData->subscriberId =  $subscriberId;
+            $otp 	= $this->generateRandomString(6);
+            $subData->otp = $otp;
+
+            if($subData->save()){
+                $msg = "You have successfully subscribed to our service. Your code is:" . $otp ." Please use this Code to avail your service. Thank you ";
+                $musk = "tel:".$subscriberId;
+                $this->sendSubsriptionSmsToSubscriber($applicationId, $msg, $musk);
+            }
+            
+        }
+
 
         $sms = new SmsSaved();
 
@@ -92,10 +151,10 @@ class SMSController extends Controller
         $sms->applicationId = isset($applicationId) ? $applicationId : "";		
         $sms->subscriberId = isset($subscriberId) ? $subscriberId : "";	
         $sms->status = isset($status) ? $status : "";		
+       
         $sms->frequency = isset($frequency) ? $frequency : "";
         $sms->timeStamp = isset($timeStamp) ? $timeStamp : "";  
-        $sms->inspect = isset($inspect) ? $inspect : "";  
-
+        
 
         if($sms->save()){
             $data['sucess'] = true;
@@ -105,6 +164,27 @@ class SMSController extends Controller
         return $data;
         
         
+    }
+
+    public function checkSubscriptionCodeOfSubscriber(Request $request){
+
+        $code = $request->input('code');
+
+        if(!empty($code)){
+            $check = SubscriptionData::whereCode($code)->get()->first();
+            
+            if(empty($check)){
+                $data['is_there'] = false;
+            }else{
+                $data['is_there'] = true;
+            }
+
+        }else{
+            $data['message'] = "Code is not found in api parameter";
+        }
+
+        return response()->json($data);
+
 
     }
      

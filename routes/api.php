@@ -23,3 +23,4 @@ Route::post('send', 'SMSController@smsRecieve');
 Route::post('send_sms', 'SMSController@smsSend');
 
 Route::post('recieve', 'SMSController@smsRecieve');
+Route::get('sub_check', 'SMSController@checkSubscriptionCodeOfSubscriber');
