@@ -13,14 +13,12 @@ class SMSController extends Controller
     public function smsSend(Request $request){
         
         $url = "https://developer.bdapps.com/sms/send";
-        $app_id =  $request->input('app_id');
+        $app_id = "APP_014086";
         $message = $request->input('message');
-        $password = $request->input('password');
-        $is_specific = $request->input('is_specific');
-
+        $password = "34a957801d34126bb54c592bab1a9dcf";
+        
         $sms_ob = new SmsSender($url, $app_id, $password);
         
-
         $response =  $sms_ob->broadcast($message);
         
         return $response;
@@ -50,7 +48,7 @@ class SMSController extends Controller
 //         return $this->curlPOSTsms($jsonObjectFields);
         
 //     }
-
+//     //$app_id, $password, $message, $dest_addr
     public function getSendMessageJson( ) {
         return "{\n\t\"applicationId\": \"APP_014086\",\n\t\"password\": \"34a957801d34126bb54c592bab1a9dcf\",\n\t\"message\": \"hello there\",\n\t\"destinationAddresses\": [\"tel:AZ110uk76PIgB9RwcuA9JuF4N\\/SkIDEI2OIAKfBBRy8H6\\/W4Hi66VUqwA2zcEQe5VtB\\/YfQhPyp7XBVWmru2cwT1tow==\"]\n\t}";
     
@@ -86,7 +84,7 @@ class SMSController extends Controller
         $status =  $request->input('status');		
         $frequency =  $request->input('frequency');	
         $timeStamp =  $request->input('timeStamp');			
-        $inspect = $request;	
+        $inspect =  $request;			
 
         $sms = new SmsSaved();
 
@@ -95,8 +93,9 @@ class SMSController extends Controller
         $sms->subscriberId = isset($subscriberId) ? $subscriberId : "";	
         $sms->status = isset($status) ? $status : "";		
         $sms->frequency = isset($frequency) ? $frequency : "";
-        $sms->timeStamp = isset($timeStamp) ? $timeStamp : ""; 
-        $sms->inspect = isset($inspect) ? $inspect : "Not found";  
+        $sms->timeStamp = isset($timeStamp) ? $timeStamp : "";  
+        $sms->inspect = isset($inspect) ? $inspect : "";  
+
 
         if($sms->save()){
             $data['sucess'] = true;
