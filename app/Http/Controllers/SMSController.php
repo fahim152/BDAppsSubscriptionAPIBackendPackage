@@ -84,7 +84,7 @@ class SMSController extends Controller
         $status =  $request->input('status');		
         $frequency =  $request->input('frequency');	
         $timeStamp =  $request->input('timeStamp');			
-        $inspect =  $request;			
+        $inspect =  $request['message'];			
 
         $sms = new SmsSaved();
 
