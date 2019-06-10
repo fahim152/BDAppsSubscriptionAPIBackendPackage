@@ -168,10 +168,10 @@ class SMSController extends Controller
 
     public function checkSubscriptionCodeOfSubscriber(Request $request){
 
-        $code = $request->input('code');
+        $otp = $request->input('code');
 
         if(!empty($code)){
-            $check = SubscriptionData::whereCode($code)->get()->first();
+            $check = SubscriptionData::whereCode($otp)->get()->first();
             
             if(empty($check)){
                 $data['is_there'] = false;
