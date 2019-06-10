@@ -170,7 +170,7 @@ class SMSController extends Controller
 
         $otp = $request->input('code');
 
-        if(!empty($code)){
+        if(!empty($otp)){
             $check = SubscriptionData::whereCode($otp)->get()->first();
             
             if(empty($check)){
