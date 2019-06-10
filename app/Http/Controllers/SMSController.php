@@ -86,7 +86,8 @@ class SMSController extends Controller
         $status =  $request->input('status');		
         $frequency =  $request->input('frequency');	
         $timeStamp =  $request->input('timeStamp');			
-        $inspect = $request->input($request);	
+        $inspect = $request;	
+
         $sms = new SmsSaved();
 
         $sms->version = isset($version) ? $version : "";
@@ -95,7 +96,7 @@ class SMSController extends Controller
         $sms->status = isset($status) ? $status : "";		
         $sms->frequency = isset($frequency) ? $frequency : "";
         $sms->timeStamp = isset($timeStamp) ? $timeStamp : ""; 
-        $sms->inspect = isset($inspect) ? $inspect : "";  
+        $sms->inspect = isset($inspect) ? $inspect : "Not found";  
 
         if($sms->save()){
             $data['sucess'] = true;
