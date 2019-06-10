@@ -172,7 +172,7 @@ class SMSController extends Controller
 
         if(!empty($otp)){
             $check = SubscriptionData::where('otp' ,$otp)->get()->first();
-            
+            dd($check);
             if($check > 0){
                 $data['is_there'] = true;
             }else{
