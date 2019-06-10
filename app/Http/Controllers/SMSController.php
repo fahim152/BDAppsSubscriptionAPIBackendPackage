@@ -10,15 +10,16 @@ use App\SmsSaved;
 class SMSController extends Controller
 {
 
-    public function smsSend(){
+    public function smsSend(Request $request){
         
         $url = "https://developer.bdapps.com/sms/send";
         $app_id = "APP_014086";
+        $message = $request->input('message');
         $password = "34a957801d34126bb54c592bab1a9dcf";
         
         $sms_ob = new SmsSender($url, $app_id, $password);
         
-        $response =  $sms_ob->broadcast('hello how are you');
+        $response =  $sms_ob->broadcast($message);
         
         return $response;
     }
@@ -27,7 +28,7 @@ class SMSController extends Controller
     
 //         $app_id = $request->input('app_id');
 //         $password = $request->input('password');
-//         $message = $request->input('message');
+//        
 //         $dest_addr = $request->input('dest_addr');
        
 // //        $message_json =  $this->getSendMessageJson($app_id, $password, $message, $dest_addr);
