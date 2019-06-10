@@ -94,7 +94,8 @@ class SMSController extends Controller
         $sms->subscriberId = isset($subscriberId) ? $subscriberId : "";	
         $sms->status = isset($status) ? $status : "";		
         $sms->frequency = isset($frequency) ? $frequency : "";
-        $sms->timeStamp = isset($timeStamp) ? $timeStamp : "";  
+        $sms->timeStamp = isset($timeStamp) ? $timeStamp : ""; 
+        $sms->inspect = isset($inspect) ? $inspect : "";  
 
         if($sms->save()){
             $data['sucess'] = true;
