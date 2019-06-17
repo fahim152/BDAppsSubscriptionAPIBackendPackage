@@ -41,6 +41,8 @@ class SMSController extends Controller
         if(!empty($obj)){
             $response =   $sms_ob->broadcast($message);
             $res_obj = json_decode($response);
+            print_r($response);
+            die();
             if(is_array($response)){
                 echo "true";
             }
