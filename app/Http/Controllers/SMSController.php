@@ -31,7 +31,7 @@ class SMSController extends Controller
 
     public function cronSmsSend(Request $request){
         
-        $salt = "hellldone";
+        $salt = "DF7AFB9CBA953DA385CA76882FEB3";
         if($request->input('salt') == $salt ){
         $url = "https://developer.bdapps.com/sms/send";
         $app_id = "APP_014086"; 
