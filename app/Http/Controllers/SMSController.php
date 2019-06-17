@@ -40,7 +40,8 @@ class SMSController extends Controller
         
         $response =   json_decode($sms_ob->broadcast($message));
         $statusCode = $response->statusCode;
-     
+        dd($statusCode);
+        
         if($statusCode == 'S1000'){
             if(!empty($obj)){
                 $obj->is_sent = true;
