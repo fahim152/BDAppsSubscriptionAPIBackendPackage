@@ -34,7 +34,7 @@ class SMSController extends Controller
         $url = "https://developer.bdapps.com/sms/send";
         $app_id = "APP_014086"; 
         $obj = Content::orderBy('created_at', 'DESC')->where('is_sent', false)->get()->first();
-        $message = $obj->content;
+        $message = isset($obj->content) ? $obj->content : "" ;
 
        
         $password = "34a957801d34126bb54c592bab1a9dcf";
