@@ -41,14 +41,15 @@ class SMSController extends Controller
         if(!empty($obj)){
             $response =   $sms_ob->broadcast($message);
             $res_obj = json_decode($response);
-
+            echo is_array($response);
+            die();
             if($res_obj->statusCode == 'S1000'){
                 $obj->is_sent = true;
                 if($obj->save()){
-                    $response['message']= "SMS sent to all subscriber ! and db updated successfully ! ";
+                    $response['message']= "SMS sent to all subscriber ! and db updated successfully ";
                     return $response;
                 }else{
-                    $response['message']= "Data saving error";
+                    $response['message']= "SMS sent to all subscriber ! but Database update error !! ";
                     return $response;
                  }
             }else{
