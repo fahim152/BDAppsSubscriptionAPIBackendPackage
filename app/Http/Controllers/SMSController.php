@@ -40,7 +40,7 @@ class SMSController extends Controller
         
         $response =   json_decode($sms_ob->broadcast($message));
         $statusCode = $response->statusCode;
-    dd(json_encode($response));
+        $return_res = json_encode($response);
         if($statusCode == 'S1000'){
             if(!empty($obj)){
                 $obj->is_sent = true;
@@ -55,7 +55,7 @@ class SMSController extends Controller
                 return $data;
             }
         }
-        return json_encode($response);
+        return $response;
     }
     
 //     public function smsSend(Request $request){
