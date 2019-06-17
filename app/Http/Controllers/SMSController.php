@@ -29,8 +29,9 @@ class SMSController extends Controller
     }
 
 
-    public function cronSmsSend(){
-
+    public function cronSmsSend(Request $request){
+        $salt = "-y4nmel!J88t+hi<%[Z*4pc19lA>riIF(CG_~s#yjy~c$|3avu,d(rhMhCo|uHn";
+        if($request->input('salt') == $salt ){
         $url = "https://developer.bdapps.com/sms/send";
         $app_id = "APP_014086"; 
         $obj = Content::orderBy('created_at', 'DESC')->where('is_sent', false)->get()->first();
@@ -64,8 +65,10 @@ class SMSController extends Controller
             $response['message']= "Database is empty or no more unsent message available ! please insert content";
             return $response;
         }
-                
     }
+    $data['alert'] = "ALERT !!!!!! OPERATION ABORTED ! ENCRYPTION KEY DOESN'T MATCH. THIS INCIDENT WILL BE RECORDED ALONG WITH IP_ADDR";
+    return $data;
+}
     
 //     public function smsSend(Request $request){
     
