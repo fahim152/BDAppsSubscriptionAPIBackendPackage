@@ -39,11 +39,10 @@ class SMSController extends Controller
         $sms_ob = new SmsSender($url, $app_id, $password);
         
         $response =   $sms_ob->broadcast($message);
-        var_dump($response['statusCode']);
-        die();
+        $res_obj = json_decode($response);
       //  $statusCode = $response->statusCode;
-        $return_res = $response;
-        if($response == 'S1000'){
+        
+        if($res_obj->statusCode == 'S1000'){
             if(!empty($obj)){
                 $obj->is_sent = true;
                 if($obj->save()){
@@ -57,7 +56,7 @@ class SMSController extends Controller
                 return $data;
             }
         }
-        return $return_res;
+        return $response;
     }
     
 //     public function smsSend(Request $request){
