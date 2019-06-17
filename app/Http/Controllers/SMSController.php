@@ -38,26 +38,48 @@ class SMSController extends Controller
         $password = "34a957801d34126bb54c592bab1a9dcf";
         $sms_ob = new SmsSender($url, $app_id, $password);
         
-       
-      //  $statusCode = $response->statusCode;
-        
-            if(!empty($obj)){
-                $response =   $sms_ob->broadcast($message);
-                $res_obj = json_decode($response);
+        if(!empty($obj)){
+            $response =   $sms_ob->broadcast($message);
+            $res_obj = json_decode($response);
+
             if($res_obj->statusCode == 'S1000'){
                 $obj->is_sent = true;
                 if($obj->save()){
+                    $response['message']= "SMS sent to all subscriber ! and db updated successfully ! ";
                     return $response;
                 }else{
-                    $data['message']= "Data saving error";
-                    return $data;
+                    $response['message']= "Data saving error";
+                    return $response;
                  }
             }else{
-                $data['message']= "Database is empty or no more unsent message available ! please insert content";
-                return $data;
+                $response['message']= "SMS not sent check server response statusCode & statusDetails for more" ;
+                return $response;
             }
+            
+
+        }else{
+            $response['message']= "Database is empty or no more unsent message available ! please insert content";
+            return $response;
         }
-        return $response;
+        
+        
+    //   //  $statusCode = $response->statusCode;
+        
+    //     if($res_obj->statusCode == 'S1000'){
+    //         if(!empty($obj)){
+    //             $obj->is_sent = true;
+    //             if($obj->save()){
+    //                 return $response;
+    //             }else{
+    //                 $data['message']= "Data saving error";
+    //                 return $data;
+    //              }
+    //         }else{
+    //             $data['message']= "Database is empty or no more unsent message available ! please insert content";
+    //             return $data;
+    //         }
+    //     }
+    //     return $response;
     }
     
 //     public function smsSend(Request $request){
