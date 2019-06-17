@@ -75,8 +75,8 @@ class SmsSender{
 	private function handleResponse($jsonResponse){
         $jsonResponse2 = json_decode($jsonResponse);
 
-		$statusCode = $jsonResponse2->statusCode;
-		$statusDetail = $jsonResponse2->statusDetail;
+		$statusCode = isset($jsonResponse2->statusCode) ? $jsonResponse2->statusCode : "" ;
+		$statusDetail = isset($jsonResponse2->statusDetail) ? $jsonResponse2->statusDetail : "";
 		
 		if(empty($jsonResponse2)){
 		     $data['statusCode'] =  "500";
