@@ -38,12 +38,13 @@ class SMSController extends Controller
         $password = "34a957801d34126bb54c592bab1a9dcf";
         $sms_ob = new SmsSender($url, $app_id, $password);
         
-        $response =   $sms_ob->broadcast($message);
-        $res_obj = json_decode($response);
+       
       //  $statusCode = $response->statusCode;
         
-        if($res_obj->statusCode == 'S1000'){
             if(!empty($obj)){
+                $response =   $sms_ob->broadcast($message);
+                $res_obj = json_decode($response);
+            if($res_obj->statusCode == 'S1000'){
                 $obj->is_sent = true;
                 if($obj->save()){
                     return $response;
