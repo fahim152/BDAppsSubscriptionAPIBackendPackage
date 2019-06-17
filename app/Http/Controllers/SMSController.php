@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Components\Curl;
 use App\Http\Components\SmsSender;
 use App\SmsSaved;
+use App\Content;
 use App\SubscriptionData;
 
 class SMSController extends Controller
@@ -24,6 +25,31 @@ class SMSController extends Controller
         
         $response =  $sms_ob->broadcast($message);
         
+        return $response;
+    }
+
+
+    public function cronSmsSend(){
+
+        $url = "https://developer.bdapps.com/sms/send";
+        $app_id = "APP_014086"; 
+        $obj = Content::orderBy('created_at', 'DESC')->where('is_sent', false)->get()->first();
+        $message = $obj->content;
+
+       
+        $password = "34a957801d34126bb54c592bab1a9dcf";
+        $sms_ob = new SmsSender($url, $app_id, $password);
+        
+        $response =  $sms_ob->broadcast($message);
+   
+        if($response['statusCode'] == 'S1000'){
+            $obj->is_sent = true;
+            if($obj->save()){
+                return $response;
+            }else{
+                return "Data saving error";
+             }
+        }
         return $response;
     }
     
