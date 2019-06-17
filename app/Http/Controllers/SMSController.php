@@ -39,7 +39,7 @@ class SMSController extends Controller
         $sms_ob = new SmsSender($url, $app_id, $password);
         
         $response =   $sms_ob->broadcast($message);
-        var_dump($response);
+        var_dump($response['statusCode']);
         die();
       //  $statusCode = $response->statusCode;
         $return_res = $response;
