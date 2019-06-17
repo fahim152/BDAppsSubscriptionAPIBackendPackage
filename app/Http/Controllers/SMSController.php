@@ -49,7 +49,7 @@ class SMSController extends Controller
                 return "Data saving error";
              }
         }
-        return $res;
+        return $response;
     }
     
 //     public function smsSend(Request $request){
