@@ -41,53 +41,30 @@ class SMSController extends Controller
         if(!empty($obj)){
             $response =   $sms_ob->broadcast($message);
             $res_obj = json_decode($response);
-            print_r($response);
-            die();
-            if(is_array($response)){
-                echo "true";
-            }
-            else{
-                echo "false";
-            }
-            die();
+       
             if($res_obj->statusCode == 'S1000'){
                 $obj->is_sent = true;
                 if($obj->save()){
-                    $response['message'] = "SMS sent to all subscriber ! and db updated successfully ";
-                    return $response;
+
+                    $data['message'] = "SMS sent to all subscriber ! and db updated successfully ";
+                    $data['response'] = $response;
+                    return $data;
                 }else{
-                    $response['message']= "SMS sent to all subscriber ! but Database update error !! ";
-                    return $response;
+                    $data['message']= "SMS sent to all subscriber ! but Database update error !! ";
+                    $data['response'] = $response;
+                    return $data;
                  }
             }else{
-                $response['message']= "SMS not sent check server response statusCode & statusDetails for more" ;
-                return $response;
+                $data['message']= "SMS not sent check server response statusCode & statusDetails for more" ;
+                $data['response'] = $response;
+                return $data;
             }
             
-
         }else{
             $response['message']= "Database is empty or no more unsent message available ! please insert content";
             return $response;
         }
-        
-        
-    //   //  $statusCode = $response->statusCode;
-        
-    //     if($res_obj->statusCode == 'S1000'){
-    //         if(!empty($obj)){
-    //             $obj->is_sent = true;
-    //             if($obj->save()){
-    //                 return $response;
-    //             }else{
-    //                 $data['message']= "Data saving error";
-    //                 return $data;
-    //              }
-    //         }else{
-    //             $data['message']= "Database is empty or no more unsent message available ! please insert content";
-    //             return $data;
-    //         }
-    //     }
-    //     return $response;
+                
     }
     
 //     public function smsSend(Request $request){
