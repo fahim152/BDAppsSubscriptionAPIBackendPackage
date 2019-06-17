@@ -4,6 +4,11 @@ namespace App\Http\Components;
 
 class SmsSender{
     
+   private $data = [
+        'statusCode' => '',
+        'statusDetail' => ''
+        ];
+    
 	private $applicationId,
 			$password,
 			$charging_amount,
@@ -22,7 +27,11 @@ class SmsSender{
 	{
      
 		if(!(isset($serverURL, $applicationId, $password)))
-			throw new SMSServiceException('Request Invalid.', 'E1312');
+		{
+		     $data['statusCode'] =  "E1312";
+		     $data['statusDetail'] =  "Request Invalid.";
+		     return $data;
+		 }   
 		else {
 			$this->applicationId = $applicationId;
 			$this->password = $password;
@@ -51,8 +60,11 @@ class SmsSender{
 	
 	// Send a message to the user with a address or send the array of addresses
 	public function sms($message, $addresses){
-		if(empty($addresses))
-			throw new SMSServiceException('Format of the address is invalid.', 'E1325');
+		if(empty($addresses)){
+		     $data['statusCode'] =  "E1325";
+		     $data['statusDetail'] =  "Format of the address is invalid.";
+		     return $data;
+		}
 		else {
 			$jsonStream = (is_string($addresses))?$this->resolveJsonStream($message, array($addresses)):(is_array($addresses)?$this->resolveJsonStream($message, $addresses):null);
 			return ($jsonStream!=null)?$this->handleResponse( $this->sendRequest($jsonStream,$this->serverURL) ):false;
@@ -66,12 +78,18 @@ class SmsSender{
 		$statusCode = $jsonResponse2->statusCode;
 		$statusDetail = $jsonResponse2->statusDetail;
 		
-		if(empty($jsonResponse2))
-			throw new SMSServiceException('Invalid server URL', '500');
+		if(empty($jsonResponse2)){
+		     $data['statusCode'] =  "500";
+		     $data['statusDetail'] = "Invalid server URL";
+		     return $data;
+		}
 		else if(strcmp($statusCode, 'S1000')==0)
 			return  $jsonResponse;
 		else
-			throw new SMSServiceException($statusDetail, $statusCode);
+		     $data['statusCode'] =  $statusCode;
+		     $data['statusDetail'] =  $statusDetail;
+		     return $data;
+			// new SMSServiceException($statusDetail, $statusCode);
 	}
 	
 	private function resolveJsonStream($message, $addresses){
@@ -133,24 +151,4 @@ class SmsSender{
 	}
 }
 
-
-class SMSServiceException{
-	private $statusCode,
-	$statusDetail;
-
-	public function __construct($message, $code){
-		parent::__construct($message);
-
-		$this->statusCode = $code;
-		$this->statusDetail = $message;
-	}
-
-	public function getErrorCode(){
-		return $this->statusCode;
-	}
-
-	public function getErrorMessage(){
-		return $this->statusDetail;
-	}
-}
 
