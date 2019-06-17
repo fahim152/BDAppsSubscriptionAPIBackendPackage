@@ -42,15 +42,17 @@ class SMSController extends Controller
         $statusCode = $response->statusCode;
        
         if($statusCode == 'S1000'){
-            dd($statusCode);
-        
             if(!empty($obj)){
                 $obj->is_sent = true;
                 if($obj->save()){
                     return $response;
                 }else{
-                    return "Data saving error";
+                    $data['message']= "Data saving error";
+                    return $data;
                  }
+            }else{
+                $data['message']= "Database is empty or no more unsent message available ! please insert content";
+                return $data;
             }
         }
         return $response;
