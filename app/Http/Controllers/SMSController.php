@@ -55,7 +55,7 @@ class SMSController extends Controller
                 return $data;
             }
         }
-        return $response;
+        return json_encode($response);
     }
     
 //     public function smsSend(Request $request){
