@@ -18,16 +18,12 @@ class SMSController extends Controller
         
         $message = $request->input('message');
        
-        // $app_id = $request->input('app_id');
-        // $password = $request->input('password');
+       // $app_id = $request->input('app_id');
+       // $password = $request->input('password');
+       
+       $app_id = "APP_014086";
+       $password = "34a957801d34126bb54c592bab1a9dcf";
 
-        //Toufiq
-        //$app_id = "APP_014086";
-        //$password = "34a957801d34126bb54c592bab1a9dcf";
-
-        // Tushar 
-        $app_id = "APP_014254";
-        $password = "4f2a447d70e380cf628f174c3c909af0";
         $sms_ob = new SmsSender($url, $app_id, $password);
         
         $response =  $sms_ob->broadcast($message);
