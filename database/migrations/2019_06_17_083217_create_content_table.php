@@ -15,7 +15,7 @@ class CreateContentTable extends Migration
     {
         Schema::create('content', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
+            $table->string('content_data');
             $table->boolean('is_sent')->default(false);
             $table->softDeletes();
             $table->timestamps();

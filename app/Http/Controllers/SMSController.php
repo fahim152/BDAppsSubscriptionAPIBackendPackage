@@ -14,13 +14,20 @@ class SMSController extends Controller
 
     public function smsSend(Request $request){
         $url = "https://developer.bdapps.com/sms/send";
-        //$app_id = "APP_014086";
-        $app_id = $request->input('app_id');
-        $message = $request->input('message');
-      // $password = "34a957801d34126bb54c592bab1a9dcf";
-        $password = $request->input('password');
-
+      
         
+        $message = $request->input('message');
+       
+        // $app_id = $request->input('app_id');
+        // $password = $request->input('password');
+
+        //Toufiq
+        //$app_id = "APP_014086";
+        //$password = "34a957801d34126bb54c592bab1a9dcf";
+
+        // Tushar 
+        $app_id = "APP_014254";
+        $password = "4f2a447d70e380cf628f174c3c909af0";
         $sms_ob = new SmsSender($url, $app_id, $password);
         
         $response =  $sms_ob->broadcast($message);
@@ -32,6 +39,7 @@ class SMSController extends Controller
     public function cronSmsSend(Request $request){
         
         $salt = "DF7AFB9CBA953DA385CA76882FEB3";
+        
         if($request->input('salt') == $salt ){
         $url = "https://developer.bdapps.com/sms/send";
         $app_id = "APP_014086"; 
