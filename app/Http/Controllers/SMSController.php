@@ -15,15 +15,14 @@ class SMSController extends Controller
     public function smsSend(Request $request){
         $url = "https://developer.bdapps.com/sms/send";
       
-        
+        $app_id = "APP_014086"; 
+        $password = "34a957801d34126bb54c592bab1a9dcf";
         $message = $request->input('message');
        
        // $app_id = $request->input('app_id');
        // $password = $request->input('password');
        
-       $app_id = "APP_014086";
-       $password = "34a957801d34126bb54c592bab1a9dcf";
-
+      
         $sms_ob = new SmsSender($url, $app_id, $password);
         
         $response =  $sms_ob->broadcast($message);
