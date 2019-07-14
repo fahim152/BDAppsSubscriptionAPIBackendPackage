@@ -243,14 +243,15 @@ class SMSController extends Controller
        $password =  isset($request->password) ? $request->password : null;
 
        if( $app_id !== null && $password !== null ){
-           $is_exist = AppPass::find($app_id);
-           if($is_exist !== null ){
-                $app = new AppPass;
-                $app->AppId = $app_id;
-                $app->password = $password;
-                $app->save();
+           $is_exist = AppPass::where ("AppId", $app_id)->get()->first();
+           if(empty($is_exist)){
+            $app = new AppPass;
+            $app->AppId = $app_id;
+            $app->password = $password;
+            $app->save();
+          
            }else{
-               return "this APP ID already exist on DB";
+            return "this APP ID already exist on DB";
            }
 
        }else{
