@@ -238,6 +238,7 @@ class SMSController extends Controller
     }
 
     public function addSubscriberPass(Request $request){
+    if($request->password == "bdapps2019"){
        $app_id = isset($request->app_id) ? $request->app_id : null;
        $password =  isset($request->password) ? $request->password : null;
        if( $app_id !== null || $password !== null ){
@@ -257,9 +258,11 @@ class SMSController extends Controller
        return "Successfully added";
       
     }
-     
-
-    
+    else{
+        return "you are not authenticated";
+    }
+}
+       
 
 
 }
