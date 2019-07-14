@@ -7,6 +7,7 @@ use App\Http\Components\Curl;
 use App\Http\Components\SmsSender;
 use App\SmsSaved;
 use App\Content;
+use App\AppPass;
 use App\SubscriptionData;
 
 class SMSController extends Controller
@@ -131,8 +132,8 @@ class SMSController extends Controller
 
     public function sendSubsriptionSmsToSubscriber($app_id, $message, $subscriberId){
         $url = "https://developer.bdapps.com/sms/send";
-
-        $password = "34a957801d34126bb54c592bab1a9dcf";
+        $password = AppPass::where('AppId', $app_id)->pluck('password')->first();
+     
         $sms_ob = new SmsSender($url, $app_id, $password);
         $res =   $sms_ob->sms($message, $subscriberId);
 
@@ -179,6 +180,7 @@ class SMSController extends Controller
       
         if($status == "REGISTERED"){
             $subData = new SubscriptionData();
+            $subData->appId =  $applicationId;
             $subData->subscriberId =  $subscriberId;
             $otp 	= $this->generateRandomString(6);
             $subData->otp = $otp;

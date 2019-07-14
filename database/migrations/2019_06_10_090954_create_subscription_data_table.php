@@ -15,6 +15,7 @@ class CreateSubscriptionDataTable extends Migration
     {
         Schema::create('subscription_data', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('AppId')->nullable();
             $table->string('subscriberId')->nullable();
             $table->string('otp')->nullable();
 
