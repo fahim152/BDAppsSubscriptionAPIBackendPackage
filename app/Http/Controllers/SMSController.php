@@ -249,6 +249,11 @@ class SMSController extends Controller
             $app->AppId = $app_id;
             $app->password = $password;
             $app->save();
+
+            $data = [
+                'app_id' => $app_id,
+                'password' => $password,
+            ];
           
            }else{
             return "this APP ID already exist on DB";
@@ -257,7 +262,7 @@ class SMSController extends Controller
        }else{
            return "you must specify app_id and password both";
        }
-       return "Successfully added";
+       return $data;
       
     }
     else{
