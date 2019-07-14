@@ -244,7 +244,7 @@ class SMSController extends Controller
 
        if( $app_id !== null && $password !== null ){
            $is_exist = AppPass::find($app_id);
-           if(!empty($is_exist)){
+           if($is_exist !== null ){
                 $app = new AppPass;
                 $app->AppId = $app_id;
                 $app->password = $password;
