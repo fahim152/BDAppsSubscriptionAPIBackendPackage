@@ -236,6 +236,27 @@ class SMSController extends Controller
 
 
     }
+
+    public function addSubscriberPass(Request $request){
+       $app_id = isset($request->app_id) ? $request->app_id : null;
+       $password =  isset($request->password) ? $request->password : null;
+       if( $app_id !== null || $password !== null ){
+           $is_exist = AppPass::find($app_id);
+           if(!empty($is_exist)){
+                $app = new AppPass;
+                $app->AppId = $app_id;
+                $app->password = $password;
+                $app->save();
+           }else{
+               return "this APP ID already exist on DB";
+           }
+
+       }else{
+           return "you must specify app_id and password both";
+       }
+       return "Successfully added";
+      
+    }
      
 
     
