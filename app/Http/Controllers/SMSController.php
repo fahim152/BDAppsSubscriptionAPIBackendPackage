@@ -263,13 +263,10 @@ class SMSController extends Controller
            return "you must specify app_id and password both";
        }
        return $data;
-      
     }
     else{
         return "you are not authenticated";
     }
 }
        
-
-
 }
