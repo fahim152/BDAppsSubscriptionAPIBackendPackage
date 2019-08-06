@@ -18,7 +18,7 @@ class CreateSubscriptionDataTable extends Migration
             $table->string('AppId')->nullable();
             $table->string('subscriberId')->nullable();
             $table->string('otp')->nullable();
-
+            $table->string('device_id')->nullable();
             $table->timestamps();
         });
     }

@@ -16,8 +16,7 @@ class SMSController extends Controller
     public function smsSend(Request $request){
         $url = "https://developer.bdapps.com/sms/send";
       
-       // $app_id = "APP_014086"; 
-       // $password = "34a957801d34126bb54c592bab1a9dcf";
+       
         $message = $request->input('message');
        
         $app_id = $request->input('app_id');
@@ -218,6 +217,7 @@ class SMSController extends Controller
     public function checkSubscriptionCodeOfSubscriber(Request $request){
 
         $otp = $request->input('code');
+        $device_id = $request->input('code');
 
         if(!empty($otp)){
             $check = SubscriptionData::where('otp' , $otp)->get()->first();
@@ -225,13 +225,14 @@ class SMSController extends Controller
             if(empty($check)){
                 $data['is_there'] = false;
             }else{
+                $check->device_id = isset($device_id) ? $device_id : "";
+                $check->save();
                 $data['is_there'] = true;
             }
 
         }else{
             $data['message'] = "Code is not found in api parameter";
         }
-
         return response()->json($data);
 
 
