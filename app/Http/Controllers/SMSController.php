@@ -217,7 +217,7 @@ class SMSController extends Controller
     public function checkSubscriptionCodeOfSubscriber(Request $request){
 
         $otp = $request->input('code');
-        $device_id = $request->input('code');
+        $device_id = $request->input('device_id');
 
         if(!empty($otp)){
             $check = SubscriptionData::where('otp' , $otp)->get()->first();
