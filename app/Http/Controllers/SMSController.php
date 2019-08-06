@@ -221,7 +221,12 @@ class SMSController extends Controller
 
         if(!empty($otp)){
             $check = SubscriptionData::where('otp' , $otp)->get()->first();
-            
+            if(!empty($device_id)){
+                $device_check = SubscriptionData::where('device_id' , $device_id)->get()->first();
+                if( $device_id !== $device_check->device->id ){
+                    return "This OTP is already used in other device.";
+                }
+            }
             if(empty($check)){
                 $data['is_there'] = false;
             }else{
