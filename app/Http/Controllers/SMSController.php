@@ -223,8 +223,8 @@ class SMSController extends Controller
             $check = SubscriptionData::where('otp' , $otp)->get()->first();
             if(!empty($device_id)){
                 $device_check = SubscriptionData::where('device_id' , $device_id)->get()->first();
-                    dd($device_check);
-                if( $device_id !== $device_check->device_id ){
+                  
+                if( empty($device_check)){
 
                      $data['message'] = "Code is not found in api parameter";
                      return response()->json($data);
