@@ -223,8 +223,8 @@ class SMSController extends Controller
             $check = SubscriptionData::where('otp' , $otp)->get()->first();
             if(!empty($device_id)){
                 $device_check = SubscriptionData::where('device_id' , $device_id)->get()->first();
-                if( $device_id !== $device_check->device->id ){
-                    return "This OTP is already used in other device.";
+                if( $device_id !== $device_check->device_id ){
+                    return  $data['message'] = "Code is not found in api parameter";
                 }
             }
             if(empty($check)){
