@@ -348,12 +348,13 @@ class SMSController extends Controller
                     }else{
                         if($device_id == $device_check){
                             $arr = array();
-                            $allMessageOfThisDeviceId = MessageData::select('message')->where('device_id', $device_id)->get();
+                            $allMessageOfThisDeviceId = MessageData::select('message')->where('device_id', $device_id)->pluck('message');
                            
                                  foreach($allMessageOfThisDeviceId as $list){
                                          array_push($arr, $list);
                                       }
                                     $msgdata = isset($arr) ? $arr : "";
+                                    
                             $data['message'] = $msgdata;
                             $data['success'] = true;
                         }else{
