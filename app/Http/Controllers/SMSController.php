@@ -145,39 +145,11 @@ class SMSController extends Controller
             'message' => 'error occured' 
   
         ];
+        // if request has requestId parameter that means user sending sms with some text. 
+        if(isset($request->requestId)){
+         
+        }else{
 
-        // if(!empty($inspect)){
-        //     $arr1 = explode(' ',trim($inspect));
-        //     $str = $arr1[1];
-
-        //     $message =  $request->input('message');	
-        //     $phone =  $request->input('phone');	
-        //     $requestId =  $request->input('requestId');		
-        //     $encoding =  $request->input('encoding');	
-        //     $applicationId =  $request->input('applicationId');		
-        //     $sourceAddress =  $request->input('sourceAddress');	
-        //     $version =  $request->input('version');		
-
-        //     $sms_req = new Sms();
-        //     $sms_req->message = isset($message) ?  $message : "";
-        //     $sms_req->requestId = isset($requestId) ?  $requestId : "";
-        //     $sms_req->encoding = isset($encoding) ?  $encoding : "";
-        //     $sms_req->applicationId = isset($applicationId) ?  $applicationId : "";
-        //     $sms_req->sourceAddress = isset($sourceAddress) ?  $sourceAddress : "";
-        //     $sms_req->version = isset($version) ?  $version : "";
-        
-        // }else{
-            
-
-        // }
-
-        $subData = new SubscriptionData();
-        $subData->subscriberId =  $request;
-        
-        $subData->save();
-        die();
-
-        
         $version =  $request->input('version');	
         $applicationId =  $request->input('applicationId');		
         $subscriberId =  $request->input('subscriberId');	
@@ -216,7 +188,7 @@ class SMSController extends Controller
             $data['sucess'] = true;
             $data['message'] = "Data Saved";
         }
-
+    }
         return $data;
         
         
