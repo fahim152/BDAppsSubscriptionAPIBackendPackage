@@ -26,3 +26,4 @@ Route::post('send_sms', 'SMSController@smsSend');
 Route::post('reg', 'SMSController@addSubscriberPass');
 Route::get('cron_sms_send', 'SMSController@cronSmsSend');
 Route::get('sub_check', 'SMSController@checkSubscriptionCodeOfSubscriber');
+Route::get('msg_check', 'SMSController@checkMessageDataOtp');

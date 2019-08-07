@@ -21,6 +21,8 @@ class CreateMessageTable extends Migration
             $table->text('applicationId')->nullable();
             $table->text('sourceAddress')->nullable();
             $table->text('version')->nullable();
+            $table->text('device_id')->nullable();
+            $table->text('otp')->nullable();
             $table->timestamps();
         });
     }
