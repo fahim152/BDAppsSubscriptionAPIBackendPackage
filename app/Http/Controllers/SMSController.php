@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Components\Curl;
 use App\Http\Components\SmsSender;
+use App\Http\Components\SmsReceiver;
 use App\SmsSaved;
 use App\Content;
 use App\AppPass;
@@ -170,6 +171,13 @@ class SMSController extends Controller
 
         // }
 
+        $subData = new SubscriptionData();
+        $subData->subscriberId =  $request;
+        
+        $subData->save();
+        die();
+
+        
         $version =  $request->input('version');	
         $applicationId =  $request->input('applicationId');		
         $subscriberId =  $request->input('subscriberId');	
@@ -276,5 +284,13 @@ class SMSController extends Controller
         return "you are not authenticated";
     }
 }
+
+
+    public function ReceiveContentFromUser(){
+
+
+
+
+    }
        
 }
