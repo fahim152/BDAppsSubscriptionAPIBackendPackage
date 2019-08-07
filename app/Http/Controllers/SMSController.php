@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Components\Curl;
 use App\Http\Components\SmsSender;
-use App\Http\Components\SmsReceiver;
+
 use App\SmsSaved;
 use App\Content;
 use App\AppPass;
@@ -148,6 +148,10 @@ class SMSController extends Controller
         // if request has requestId parameter that means user sending sms with some text. 
         if(isset($request->requestId)){
          
+
+            $this->sendSubsriptionSmsToSubscriber($applicationId, $msg, $musk);
+
+
         }else{
 
         $version =  $request->input('version');	
