@@ -19,9 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::post('send', 'SMSController@smsRecieve');
+Route::post('send', 'SMSController@smsReceive');
 Route::post('send_sms', 'SMSController@smsSend');
 
+Route::post('ussd', 'SMSController@ussdReceive');
 
 Route::post('reg', 'SMSController@addSubscriberPass');
 Route::get('cron_sms_send', 'SMSController@cronSmsSend');

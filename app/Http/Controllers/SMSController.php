@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Components\Curl;
 use App\Http\Components\SmsSender;
-
+use App\Http\Components\SubscriptionSender;
+use App\USSDSub;
 use App\SmsSaved;
 use App\Content;
 use App\AppPass;
@@ -136,7 +137,7 @@ class SMSController extends Controller
 
     }
 
-    public function smsRecieve(Request $request){
+    public function smsReceive(Request $request){
    
         // if request has requestId parameter that means user sending sms with some text. 
         if(isset($request->requestId)){
@@ -279,6 +280,26 @@ class SMSController extends Controller
 }
 
 
+public function ussdReceive(Request $request){
+    if(isset($request)){
+        $ussd = new USSDSub;
+        
+        $ussd->message = isset($request->message) ? $request->message : '';
+        $ussd->ussdOperation = isset($request->ussdOperation) ? $request->ussdOperation : '';
+        $ussd->requestId = isset($request->requestId) ? $request->requestId : '';
+        $ussd->sessionId = isset($request->sessionId) ? $request->sessionId : '';
+        $ussd->encoding = isset($request->encoding) ? $request->encoding : '';
+        $ussd->AppId = isset($request->applicationId) ? $request->applicationId : '';
+        $ussd->subscriberId = isset($request->sourceAddress) ? $request->sourceAddress : '';
+        $ussd->version = isset($request->version) ? $request->version : '';
+
+        if($ussd->save()){
+
+        }
+     
+        
+    }
+}
     // public function checkMessageDataOtp(Request $request){
     //     $otp = $request->input('code');
     //     $device_id = $request->input('device_id');
