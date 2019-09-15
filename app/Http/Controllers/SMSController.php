@@ -292,9 +292,22 @@ public function ussdReceive(Request $request){
         $ussd->AppId = isset($request->applicationId) ? $request->applicationId : '';
         $ussd->subscriberId = isset($request->sourceAddress) ? $request->sourceAddress : '';
         $ussd->version = isset($request->version) ? $request->version : '';
-
+     
         if($ussd->save()){
+            $subData = new SubscriptionData();
+            $subData->appId =  $request->applicationId;
+            $subData->subscriberId =  $request->sourceAddress;
+            $otp 	= $this->generateRandomString(6);
+            $subData->otp = $otp;
 
+            $msg = "You have successfully subscribed to our service. Your code is:" . $otp ." Please use this Code to avail your service. Thank you ";
+            $this->sendSubsriptionSmsToSubscriber($request->applicationId, $msg, $request->sourceAddress);
+            $data['sucess'] = true;
+            $data['message'] = "Data Saved";
+        $subData->save();
+        }else{
+            $data['sucess'] = false;
+            $data['message'] = "Messaeg Data saving error.";
         }
      
         
