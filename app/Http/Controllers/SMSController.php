@@ -283,7 +283,9 @@ class SMSController extends Controller
 public function ussdReceive(Request $request){
     if(isset($request)){
         $ussd = new USSDSub;
-        
+        $ussd->message = $request->all();
+        $ussd->save();
+        die();
         $ussd->message = isset($request->message) ? $request->message : '';
         $ussd->ussdOperation = isset($request->ussdOperation) ? $request->ussdOperation : '';
         $ussd->requestId = isset($request->requestId) ? $request->requestId : '';
@@ -304,7 +306,7 @@ public function ussdReceive(Request $request){
             $this->sendSubsriptionSmsToSubscriber($request->applicationId, $msg, $request->sourceAddress);
             $data['sucess'] = true;
             $data['message'] = "Data Saved";
-        $subData->save();
+            $subData->save();
         }else{
             $data['sucess'] = false;
             $data['message'] = "Messaeg Data saving error.";
